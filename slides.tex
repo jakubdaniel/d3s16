@@ -1,0 +1,154 @@
+\documentclass[d3s]{beamer}
+\def\event{{D3S Seminar}}
+%\def\date{{2014-09-23}}
+%\usetheme[event=\event,footlineauthor]{D3S}
+\usetheme[event=\event]{D3S}
+\usepackage{colortbl}
+\title{Checking LTL Properties of Infinite-State Systems via Reduction to Safety}
+\def\fbk{*}
+\author{\vskip0.5em{\bfseries Jakub Daniel\phantom{\fbk}}, {Alberto Griggio\fbk}, {Stefano Toneta\fbk}, {Alessandro Cimatti\fbk}, \vskip1.5cm \fbk Fondazione Bruno Kessler}
+\begin{document}
+\titleframe
+\begin{frame}
+\frametitle{Infinite-State Systems and Properties}
+$\text{system} \sim (I, T)$ \\
+example: \\
+$$
+\begin{array}{rcl}
+I &\equiv& \big[ x = 0 \big] \\
+T &\equiv& \big[ x < 10 \wedge x' = x + 1 \big] \vee \big[ x' = x \big] \\
+P &\equiv& G\ x \le 10 \\
+\end{array}
+$$
+\vskip1em
+\centering\includegraphics{slides7}
+\end{frame}
+\begin{frame}
+\frametitle{Reduction to Fairness}
+\begin{itemize}
+\item standard reduction to $FG\ \neg f$ (emptiness of $L(A_S \times A_{\neg \varphi})$)
+\item counterexample is path where $GF\ f$
+\item how to prove absence of such cex?
+\end{itemize}
+\end{frame}
+\begin{frame}
+\frametitle<1>{Insight from Termination Analysis}
+\frametitle<2>{\ldots in Our Setting}
+Finite set $\Phi$ of well-founded binary relations to show
+\only<1>{finitness of chains of states in any computation}
+\only<2>{$FG\ \neg f$ \\ \strut}
+\vskip1cm
+$$\only<2>{\bgroup\color{red}}T\only<2>{_f}^+\only<2>\egroup \cap (Acc \times Acc) \subseteq \bigcup \Phi$$
+\end{frame}
+\begin{frame}
+\frametitle{Why \ldots}
+$FG\ \neg f$ iff $\exists \text{ finite set } \Phi \text{ of well-founded relations}$ such that
+\begin{eqnarray}
+T_f^+ \cap (Acc \times Acc) \subseteq \bigcup \Phi \label{eqn:wf}
+\end{eqnarray}
+\vskip1cm
+Consider (for contradiction) a path where $GF\ f$ and (\ref{eqn:wf}) holds for some $\Phi$.
+\end{frame}
+\subtitleframe{\includegraphics{slides1}}
+\subtitleframe{\includegraphics{slides2}}
+\subtitleframe{\includegraphics{slides3}}
+\subtitleframe{\includegraphics{slides4}}
+\subtitleframe{\includegraphics{slides5}}
+\begin{frame}
+\frametitle{Contradiction}
+\begin{itemize}
+\itemsep=0.25cm
+\item $\text{Path } \pi \models GF\ f$
+\item \ldots
+\item Infinite complete graph edge-labelled with $k$ colors
+\itemsep=1cm
+\item $\rightarrow$ infinite monochromatic clique (Ramsey's Theorem)
+\itemsep=0.25cm
+\item $\rightarrow$ infinite monochromatic $\Phi_i$-connected chain of states
+\item $\rightarrow$ covering relation $\Phi_i$ is not well-founded
+\item $\rightarrow$ contradiction
+\end{itemize}
+\end{frame}
+\subtitleframe{}
+\begin{frame}
+\frametitle{Reduction to Safety}
+Checking coverage of transitions $\in T^+ \cap (Acc \times Acc)$ with \emph{fixed} $\Phi$ is \\
+\vskip1cm
+\centering \Huge Safety Problem
+\end{frame}
+\begin{frame}
+\frametitle{Discovery of $\Phi$}
+Start from $\emptyset$ and build it up by learning from counterexamples. \\
+\vskip0.5cm
+\hbox to \hsize{\hfill\includegraphics{slides8}\hfill}
+\vskip0.5cm
+Incomplete but sound: Use conservative predicate abstraction to find an abstract lasso.\\
+\vskip0.5cm
+\centering\includegraphics{slides6}
+\end{frame}
+\begin{frame}
+\frametitle{Refinement}
+Two axes of refinement:
+\begin{itemize}
+\item abstraction: interpolants from infeasible finite unrolling
+\begin{itemize}
+\item fixed unrolling encoded as an unsatisfiable CNF formula
+\end{itemize}
+\item $\Phi$: termination argument (Farkas' lemma for reals and integers)
+\begin{itemize}
+\item lasso encoded as a conjunction of linear inequalities
+\end{itemize}
+\end{itemize}
+\end{frame}
+\begin{frame}
+\frametitle{Possible Outcomes}
+\begin{itemize}
+\item Safe: property holds
+\item Abstraction can be refined
+\item Lasso can be blocked by augmenting $\Phi$ with wf relation
+\item Cover counterexamples shorter than $n$ in hope of progress
+\item Unknown
+\end{itemize}
+\end{frame}
+\subtitleframe{}
+\begin{frame}
+\frametitle{Falsification}
+\begin{itemize}
+\item So far: searching for poof
+\item Falsify by search for a concrete lasso (incomplete, use BMC)
+\end{itemize}
+\end{frame}
+\subtitleframe{}
+\begin{frame}
+\frametitle{Implementation}
+\begin{itemize}
+\item IC3 with implicit abstraction as underlying safety checker
+\begin{itemize}
+\item Our encoding can be refined incrementally
+\item IC3 in turn exploits incrementality of SMT
+\item Everything done incrementally
+\item Everything done symbolically (no explicit automata subtractions)
+\end{itemize}
+\end{itemize}
+\end{frame}
+\subtitleframe{}
+\begin{frame}
+\frametitle{Early Evaluation}
+\centering
+\def\us{\cellcolor{blue!100}}
+\def\na{\color{darkgray}$^\text{\tiny N}\!/\!_\text{\tiny A}$}
+\def\sum{\cellcolor{gray}}
+\begin{tabular}{lr | r r r r r}
+\multicolumn{2}{c|}{benchmark} & \multicolumn{5}{c}{solver} \\
+\multicolumn{1}{l}{family} & \multicolumn{1}{l|}{\#} & \multicolumn{1}{l}{\us ic3ia} & \multicolumn{1}{l}{hsf} & \multicolumn{1}{l}{Ultimate} & \multicolumn{1}{l}{T2-CTL*} & \multicolumn{1}{l}{T2-term} \\
+\sum all & \sum 807 & \us 562 & \sum 84 & \sum 299 & \sum 75 & \sum \na \\
+bip          & 240 & \us 213 & 13 &  40 &  0 & \na \\
+timed-toint  & 316 & \us 162 &  8 &  80 &  0 & \na \\
+crafted      &  17 & \us  16 &  8 &   6 &  4 & \na \\
+ultimate-ltl &  41 & \us  33 &  3 &  27 &  5 & \na \\
+t2-testsuite & 193 & \us 138 & 52 & 146 & 66 & 191 \\
+\end{tabular} \\
+\vskip1cm
+Submission to CAV'16
+\end{frame}
+\end{document}
