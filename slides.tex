@@ -6,7 +6,7 @@
 \usepackage{colortbl}
 \title{Checking LTL Properties of Infinite-State Systems via Reduction to Safety}
 \def\fbk{*}
-\author{\vskip0.5em{\bfseries Jakub Daniel\phantom{\fbk}}, {Alberto Griggio\fbk}, {Stefano Toneta\fbk}, {Alessandro Cimatti\fbk}, \vskip1.5cm \fbk Fondazione Bruno Kessler}
+\author{\vskip0.5em{\bfseries Jakub Daniel\phantom{\fbk}}, {Alberto Griggio\fbk}, {Stefano Tonetta\fbk}, {Alessandro Cimatti\fbk}, \vskip1.5cm \fbk Fondazione Bruno Kessler}
 \begin{document}
 \titleframe
 \begin{frame}
@@ -32,22 +32,21 @@ $$
 \end{itemize}
 \end{frame}
 \begin{frame}
-\frametitle<1>{Insight from Termination Analysis}
-\frametitle<2>{\ldots in Our Setting}
-Finite set $\Phi$ of well-founded binary relations to show
-\only<1>{finitness of chains of states in any computation}
-\only<2>{$FG\ \neg f$ \\ \strut}
+\frametitle<1-2>{Insight from Termination Analysis}
+\frametitle<3>{\ldots in Our Setting}
+\frametitle<4>{Why \ldots}
+\only<1-3>{Finite set $\Phi$ of well-founded binary relations to show}
+\only<1-2>{finitness of chains of states in any computation}
+\only<3>{$FG\ \neg f$ \\ \strut}
+\only<4>{$FG\ \neg f$ iff $\exists \text{ finite set } \Phi \text{ of well-founded relations}$ such that \\ \strut}
 \vskip1cm
-$$\only<2>{\bgroup\color{red}}T\only<2>{_f}^+\only<2>\egroup \cap (Acc \times Acc) \subseteq \bigcup \Phi$$
-\end{frame}
-\begin{frame}
-\frametitle{Why \ldots}
-$FG\ \neg f$ iff $\exists \text{ finite set } \Phi \text{ of well-founded relations}$ such that
 \begin{eqnarray}
-T_f^+ \cap (Acc \times Acc) \subseteq \bigcup \Phi \label{eqn:wf}
+\only<3>{\bgroup\color{red}}T\only<3>{_f}^+\only<3>\egroup \cap (Acc \times Acc) \subseteq \bigcup \Phi \label{eqn:wf}
 \end{eqnarray}
 \vskip1cm
-Consider (for contradiction) a path where $GF\ f$ and (\ref{eqn:wf}) holds for some $\Phi$.
+\only<1>{\strut \\}
+\only<2-3>{\strut well-founded $\sim$ every non-empty set has a minimal element \\}
+\only<4>{\strut Consider a path where $GF\ f$ and (\ref{eqn:wf}) holds for some $\Phi$. \\}
 \end{frame}
 \subtitleframe{\includegraphics{slides1}}
 \subtitleframe{\includegraphics{slides2}}
