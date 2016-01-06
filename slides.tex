@@ -1,4 +1,4 @@
-\documentclass[d3s]{beamer}
+\documentclass[d3s,tikz]{beamer}
 \def\event{{D3S Seminar}}
 %\def\date{{2014-09-23}}
 %\usetheme[event=\event,footlineauthor]{D3S}
@@ -7,8 +7,28 @@
 \title{Checking LTL Properties of Infinite-State Systems via Reduction to Safety}
 \def\fbk{*}
 \author{\vskip0.5em{\bfseries Jakub Daniel\phantom{\fbk}}, {Alberto Griggio\fbk}, {Stefano Tonetta\fbk}, {Alessandro Cimatti\fbk}, \vskip1.5cm \fbk Fondazione Bruno Kessler}
+\def\icon#1#2{\tikz\node[circle,draw,inner sep=0.5cm,path picture={\node at (path picture bounding box.center){\includegraphics[#2]{#1}};}]{};}
+\def\avatar#1#2#3{\hbox to 3cm{\hsize=3cm\centering\vbox{\icon{#1}{#2}\\#3}}}
 \begin{document}
 \titleframe
+\subtitleframe{Report from an internship in Fondazione Bruno Kessler (FBK) in Povo, Italy}
+\begin{frame}
+\frametitle{FBK - Embedded Systems Group}
+\hbox to \hsize{
+\hfill
+\avatar{alberto.jpg}{width=2cm,trim=0 1cm 0 0}{Alberto \\ Griggio}
+\hfill
+\avatar{stefano.jpg}{width=2cm,trim=2.5cm 1.5cm 0 0}{Stefano \\ Tonetta}
+\hfill
+\avatar{alessandro.png}{width=17cm,trim=1.75cm 8cm 0 0}{Alessandro \\ Cimatti}
+\hfill
+}
+\vskip0.5cm
+\hbox to \hsize{\tiny \hfill and about 20 more people \hfill}
+\vskip1cm
+NuSMV $\rightarrow$ nuXmv, FSAP $\rightarrow$ xSAP, MathSAT, Kratos, \ldots
+\end{frame}
+\subtitleframe{}
 \begin{frame}
 \frametitle{Infinite-State Systems and Properties}
 $\text{system} \sim (I, T)$ \\
@@ -138,7 +158,7 @@ Two axes of refinement:
 \def\na{\color{darkgray}$^\text{\tiny N}\!/\!_\text{\tiny A}$}
 \def\sum{\cellcolor{gray}}
 \begin{tabular}{lr | r r r r r}
-\multicolumn{2}{c|}{benchmark} & \multicolumn{5}{c}{solver} \\
+\multicolumn{2}{c|}{benchmark} & \multicolumn{5}{c}{solved instances} \\
 \multicolumn{1}{l}{family} & \multicolumn{1}{l|}{\#} & \multicolumn{1}{l}{\us ic3ia} & \multicolumn{1}{l}{hsf} & \multicolumn{1}{l}{Ultimate} & \multicolumn{1}{l}{T2-CTL*} & \multicolumn{1}{l}{T2-term} \\
 \sum all & \sum 807 & \us 562 & \sum 84 & \sum 299 & \sum 75 & \sum \na \\
 bip          & 240 & \us 213 & 13 &  40 &  0 & \na \\
