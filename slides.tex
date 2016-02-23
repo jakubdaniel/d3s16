@@ -13,6 +13,11 @@
 \titleframe
 \subtitleframe{Report from an internship in Fondazione Bruno Kessler (FBK) in Povo, Italy}
 \begin{frame}
+\frametitle{FBK, Povo, Italy}
+\centering
+\includegraphics[scale=0.25,trim=0 2cm 0 8cm,clip]{fbk}
+\end{frame}
+\begin{frame}
 \frametitle{FBK - Embedded Systems Group}
 \hbox to \hsize{
 \hfill
@@ -61,18 +66,23 @@ $$
 \only<4>{$FG\ \neg f$ iff $\exists \text{ finite set } \Phi \text{ of well-founded relations}$ such that \\ \strut}
 \vskip1cm
 \begin{eqnarray}
-\only<3>{\bgroup\color{red}}T\only<3>{_f}^+\only<3>\egroup \cap (Acc \times Acc) \subseteq \bigcup \Phi \label{eqn:wf}
+\only<3>{\bgroup\color{red}}T\only<3-4>{_f}^+\only<3>\egroup \cap (Acc \times Acc) \subseteq \bigcup \Phi \label{eqn:wf}
 \end{eqnarray}
 \vskip1cm
 \only<1>{\strut \\}
 \only<2-3>{\strut well-founded $\sim$ every non-empty set has a minimal element \\}
 \only<4>{\strut Consider a path where $GF\ f$ and (\ref{eqn:wf}) holds for some $\Phi$. \\}
 \end{frame}
-\subtitleframe{\includegraphics{slides1}}
-\subtitleframe{\includegraphics{slides2}}
-\subtitleframe{\includegraphics{slides3}}
-\subtitleframe{\includegraphics{slides4}}
-\subtitleframe{\includegraphics{slides5}}
+\subtitleframe{%
+\includegraphics<1>{slides1}%
+\includegraphics<2>{slides2}%
+\includegraphics<3>{slides3}%
+\includegraphics<4>{slides4}%
+\includegraphics<5>{slides5}%
+\uncover<5>{%
+$$T_f^+ {\color{gray}{} \cap (Acc \times Acc)} \subseteq \bigcup \Phi$$%
+}%
+}
 \begin{frame}
 \frametitle{Contradiction}
 \begin{itemize}
@@ -81,20 +91,32 @@ $$
 \item \ldots
 \item Infinite complete graph edge-labelled with $k$ colors
 \itemsep=1cm
-\item $\rightarrow$ infinite monochromatic clique (Ramsey's Theorem)
+\uncover<2->{\item $\rightarrow$ infinite monochromatic clique (Ramsey's Theorem)}
 \itemsep=0.25cm
-\item $\rightarrow$ infinite monochromatic $\Phi_i$-connected chain of states
-\item $\rightarrow$ covering relation $\Phi_i$ is not well-founded
-\item $\rightarrow$ contradiction
+\uncover<3->{\item $\rightarrow$ infinite monochromatic $\Phi_i$-connected chain of states}
+\uncover<4->{\item $\rightarrow$ covering relation $\Phi_i$ is not well-founded}
+\uncover<5->{\item $\rightarrow$ contradiction}
 \end{itemize}
 \end{frame}
 \subtitleframe{}
 \begin{frame}
 \frametitle{Reduction to Safety}
-Checking coverage of transitions $\in T^+ \cap (Acc \times Acc)$ with \emph{fixed} $\Phi$ is \\
+Checking coverage of transitions $\in T_f^+ \cap (Acc \times Acc)$ with \emph{fixed} $\Phi$ is \\
 \vskip1cm
 \centering \Huge Safety Problem
 \end{frame}
+\begin{frame}
+\frametitle{Safety}
+Checking coverage of a transition $\tau$ \\
+\includegraphics{slides9} \\
+\vskip1em
+may be reduced to \\
+\vskip1em
+\includegraphics{slides10} \\
+\vskip1em
+where $X_c := X$ performed non-deterministically, $\Phi(X_c, X)$ checked for all $f$-states in $Acc$.
+\end{frame}
+\subtitleframe{}
 \begin{frame}
 \frametitle{Discovery of $\Phi$}
 Start from $\emptyset$ and build it up by learning from counterexamples. \\
@@ -106,7 +128,12 @@ Incomplete but sound: Use conservative predicate abstraction to find an abstract
 \centering\includegraphics{slides6}
 \end{frame}
 \begin{frame}
-\frametitle{Refinement}
+\frametitle{Analyzing lassos}
+How to show infeasibility of
+\begin{center}
+\includegraphics{slides6}
+\end{center}
+\vskip2em
 Two axes of refinement:
 \begin{itemize}
 \item abstraction: interpolants from infeasible finite unrolling

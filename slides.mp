@@ -167,15 +167,17 @@ p5 := image(
 
 p6 := image(
     for i=1 upto n:
-        if (i=3) or (i=4):
-            draw node(s[i], btex etex, darkred, red);
-        else:
-            draw node(s[i], btex etex, darkgray, gray);
-        fi;
         if (i=3):
             drawarrow edge(s[i], s[i+1], 0) withpen pencircle scaled 1.5 withcolor darkred;
         elseif (i<>n):
             drawarrow edge(s[i], s[i+1], 0) withpen pencircle scaled 1.5 withcolor darkgray;
+        fi;
+    endfor;
+    for i=1 upto n:
+        if (i=3) or (i=4):
+            draw node(s[i], btex etex, darkred, red);
+        else:
+            draw node(s[i], btex etex, darkgray, gray);
         fi;
     endfor;
     drawarrow edge(s5, s2, -1.25u) withpen pencircle scaled 1.5 withcolor darkgray;
@@ -260,6 +262,34 @@ endfig;
 
 beginfig(8)
     draw p7;
+endfig;
+
+beginfig(9)
+    drawarrow edge(s3, s5, 1u) withpen pencircle scaled 1.5 withcolor darkred;
+    label.top(btex $\tau \in \bigcup\Phi$ etex scaled 1.2, .5[s3, s5] + (0u, 1u)) withcolor darkred;
+    for i=1 upto n:
+        drawarrow edge(s[i], s[i+1], 0) withpen pencircle scaled 1.5 withcolor darkgray;
+        if (i=3):
+            draw node(s[i], btex $X_{i_1}$ etex, darkred, red);
+        elseif (i=5):
+            draw node(s[i], btex $X_{i_2}$ etex, darkred, red);
+        else:
+            draw node(s[i], btex etex, darkgray, gray);
+        fi;
+    endfor;
+endfig;
+
+beginfig(10)
+    for i=1 upto n:
+        drawarrow edge(s[i], s[i+1], 0) withpen pencircle scaled 1.5 withcolor darkgray;
+        if (i=3):
+            draw node(s[i], btex $X_c := X$ etex scaled 0.6, darkred, red);
+        elseif (i=5):
+            draw node(s[i], btex $\Phi(X_c, X)$ etex scaled 0.6, darkred, red);
+        else:
+            draw node(s[i], btex etex, darkgray, gray);
+        fi;
+    endfor;
 endfig;
 
 end
