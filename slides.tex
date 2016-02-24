@@ -45,13 +45,13 @@ T &\equiv& \big[ x < 10 \wedge x' = x + 1 \big] \vee \big[ x' = x \big] \\
 P &\equiv& G\ x \le 10 \\
 \end{array}
 $$
-\vskip1em
-\centering\includegraphics{slides7}
+%\vskip1em
+%\centering\includegraphics{slides7}
 \end{frame}
 \begin{frame}
 \frametitle{Reduction to Fairness}
 \begin{itemize}
-\item standard reduction to $FG\ \neg f$ (emptiness of $L(A_S \times A_{\neg \varphi})$)
+\item standard reduction to $FG\ \neg f$ (emptiness of $L(A_S \times A_{\neg P})$)
 \item counterexample is path where $GF\ f$
 \item how to prove absence of such cex?
 \end{itemize}
@@ -79,7 +79,7 @@ $$
 \includegraphics<3>{slides3}%
 \includegraphics<4>{slides4}%
 \includegraphics<5>{slides5}%
-$$T\uncover<2->{\uncover<3->{_f}^+} \cap (Acc \times Acc) \uncover<5->{\overset{?}{\subseteq} \bigcup \Phi}$$%
+$$\bgroup T\uncover<2->{^+\egroup\uncover<3->{_f}} \cap (Acc \times Acc) \uncover<5->{\overset{?}{\subseteq} \bigcup \Phi}$$%
 }
 \begin{frame}
 \frametitle{Contradiction}
@@ -158,7 +158,7 @@ Two axes of refinement:
 \begin{frame}
 \frametitle{Falsification}
 \begin{itemize}
-\item So far: searching for poof
+\item So far: searching for proof
 \item Falsify by search for a concrete lasso (incomplete, use BMC)
 \end{itemize}
 \end{frame}

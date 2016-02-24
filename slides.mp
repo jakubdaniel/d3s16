@@ -247,17 +247,15 @@ beginfig(7)
     pair n[];
 
     n0 := (0u, 0u);
-    n1 := (2u, 0u);
 
     draw node(n0, btex etex, darkgray, gray);
-    draw node(n1, btex etex, darkgray, gray);
 
-    drawarrow edge(n0, n1, 0) withpen pencircle scaled 1.5 withcolor darkgray;
     drawarrow edge(n0, n0 + (0.1, 0), 1u) withpen pencircle scaled 1.5 withcolor darkgray;
-    drawarrow edge(n1, n1 + (0.1, 0), 1u) withpen pencircle scaled 1.5 withcolor darkgray;
     drawarrow edge(n0 - (1.5u, 0), n0, 0) withpen pencircle scaled 1.5 withcolor darkgray;
+    drawarrow (edge(n0, n0 - (0.1, 0), -1u) rotated 180) withpen pencircle scaled 1.5 withcolor darkgray;
 
-    label.top(btex $\begin{array}{c} \mathbf{x < 10} \\ \mathbf{x := x + 1}\end{array}$ etex, n0 + (0, 1u)) withcolor darkgray;
+    label.top(btex $\begin{array}{c} \mathbf{x < 10} \\ \mathbf{x' = x + 1}\end{array}$ etex, n0 + (0, 1u)) withcolor darkgray;
+    label.bot(btex $\begin{array}{c} \mathbf{x' = x}\end{array}$ etex, n0 - (0, 1u)) withcolor darkgray;
 endfig;
 
 beginfig(8)
